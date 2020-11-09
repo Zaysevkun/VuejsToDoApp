@@ -1,16 +1,24 @@
 <template>
-<li>
-  <span><input type="checkbox"></span>
-  <strong>{{task.id}}</strong>
+<li v-bind:class="{completed: task.completed}">
+  <span><input type="checkbox" @change="
+  task.completed = !task.completed">
+  <strong>{{index + 1}}</strong>
+  </span>
   {{ task.title }}
-  <button class="rm">&times;</button>
+  <button class="rm" @click="$emit('deleteTask', task.id)">&times;</button>
 </li>
 </template>
 
 <script>
 export default {
 name: "ToDoLIstItem",
-  props:['task'],
+  props: {
+  task: {
+    type: Object,
+    required: true
+  },
+    index: Number
+  },
 }
 </script>
 

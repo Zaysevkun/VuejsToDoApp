@@ -1,8 +1,10 @@
 <template>
 <ul>
   <ToDoLIstItem
-  v-for="task of tasks" :key="task"
+  v-for="(task, ind) of tasks" :key="ind"
+  v-bind:index="ind"
   v-bind:task="task"
+  @deleteTask="deleteTask"
   />
 </ul>
 </template>
@@ -14,6 +16,11 @@ export default {
   props: ['tasks'],
   components: {
     ToDoLIstItem,
+  },
+  methods: {
+    deleteTask(id) {
+      this.$emit('deleteTask', id)
+    }
   }
 }
 
